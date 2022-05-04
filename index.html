@@ -13968,13 +13968,28 @@ a.anchor-link {
     </script>
     <!-- End of mathjax configuration --></head>
 <body class="jp-Notebook" data-jp-theme-light="true" data-jp-theme-name="JupyterLab Light">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h1 id="CMSC320---Introduction-to-Data-Science">CMSC320 - Introduction to Data Science<a class="anchor-link" href="#CMSC320---Introduction-to-Data-Science">&#182;</a></h1><h2 id="Final-Tutorial">Final Tutorial<a class="anchor-link" href="#Final-Tutorial">&#182;</a></h2><h4 id="David-Martin">David Martin<a class="anchor-link" href="#David-Martin">&#182;</a></h4><hr>
+
+</div>
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>The purpose of this tutorial is to perform an analysis of COVID data across the state of Virginia.</p>
+
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-python"><pre><span></span>
+<div class=" highlight hl-python"><pre><span></span><span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
 </pre></div>
 
      </div>
@@ -13985,26 +14000,12 @@ a.anchor-link {
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="CMSC320-Final-Tutorial">CMSC320 Final Tutorial<a class="anchor-link" href="#CMSC320-Final-Tutorial">&#182;</a></h1><h2 id="David-Martin">David Martin<a class="anchor-link" href="#David-Martin">&#182;</a></h2><hr>
-<p>An analysis of COVID data across Virginia</p>
+<h2 id="Data-Collection">Data Collection<a class="anchor-link" href="#Data-Collection">&#182;</a></h2><p>Lets start by pulling the data from the dataset "VDH-COVID-19-PublicUseDataset-Cases" as found on data.virginia.gov, and taking a look at what it contains:</p>
+<p><a href="https://data.virginia.gov/Government/VDH-COVID-19-PublicUseDataset-Cases/bre9-aqqr">https://data.virginia.gov/Government/VDH-COVID-19-PublicUseDataset-Cases/bre9-aqqr</a></p>
+<p>I uploaded the .csv to my GitHub at the following link:</p>
+<p><a href="https://github.com/martindavid1995/Data-Science-Tutorial">https://github.com/martindavid1995/Data-Science-Tutorial</a></p>
 
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-python"><pre><span></span><span class="kn">import</span> <span class="nn">folium</span>
-<span class="kn">import</span> <span class="nn">requests</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
@@ -14013,8 +14014,7 @@ a.anchor-link {
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-python"><pre><span></span><span class="c1"># Pull data on COVID cases across virginia</span>
 <span class="n">covid_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;https://raw.githubusercontent.com/martindavid1995/Data-Science-Tutorial/master/Covid_VA.csv&quot;</span><span class="p">)</span>
-<span class="n">covid_data</span>
-<span class="n">covid_data</span><span class="o">.</span><span class="n">dtypes</span>
+<span class="n">covid_data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 
      </div>
@@ -14034,16 +14034,88 @@ a.anchor-link {
 
 
 
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
-<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>Report Date            object
-FIPS                    int64
-Locality               object
-VDH Health District    object
-Total Cases             int64
-Hospitalizations        int64
-Deaths                  int64
-dtype: object</pre>
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Report Date</th>
+      <th>FIPS</th>
+      <th>Locality</th>
+      <th>VDH Health District</th>
+      <th>Total Cases</th>
+      <th>Hospitalizations</th>
+      <th>Deaths</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>03/17/2020</td>
+      <td>51001</td>
+      <td>Accomack</td>
+      <td>Eastern Shore</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>03/17/2020</td>
+      <td>51003</td>
+      <td>Albemarle</td>
+      <td>Thomas Jefferson</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>03/17/2020</td>
+      <td>51005</td>
+      <td>Alleghany</td>
+      <td>Alleghany</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>03/17/2020</td>
+      <td>51007</td>
+      <td>Amelia</td>
+      <td>Piedmont</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>03/17/2020</td>
+      <td>51009</td>
+      <td>Amherst</td>
+      <td>Central Virginia</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
 </div>
 
 </div>
@@ -14052,13 +14124,19 @@ dtype: object</pre>
 
 </div>
 
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Data-Management">Data Management<a class="anchor-link" href="#Data-Management">&#182;</a></h2><p>Now that we have our dataset imported, lets start looking at what we have to work with. In order to visualize our data, we should look to find what</p>
+
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-python"><pre><span></span>
+<div class=" highlight hl-python"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Total number of columns in the dataset: &quot;</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">covid_data</span><span class="o">.</span><span class="n">index</span><span class="p">))</span>
 </pre></div>
 
      </div>
@@ -14066,13 +14144,44 @@ dtype: object</pre>
 </div>
 </div>
 
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>Total number of columns in the dataset:  103607
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>As we can see, we have a pretty large set of data. Over 100,000 rows with seemingly an entry for each locality for each date within the specified range. Lets see what the day range looks like:</p>
+
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-python"><pre><span></span>
+<div class=" highlight hl-python"><pre><span></span><span class="k">def</span> <span class="nf">printMinMax</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">column</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Oldest entry: &quot;</span><span class="p">,</span><span class="n">df</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">())</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Most recent entry: &quot;</span><span class="p">,</span><span class="n">df</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+    
+<span class="n">printMinMax</span><span class="p">(</span><span class="n">covid_data</span><span class="p">,</span> <span class="s2">&quot;Report Date&quot;</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -14080,6 +14189,285 @@ dtype: object</pre>
 </div>
 </div>
 
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>Oldest entry:  01/01/2021
+Most recent entry:  12/31/2021
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>If we look at the results of the above cell, we notice our first issue with this dataset. The date range from the days above shows January 1, 2021 as being the earliest recorded date when we can clearly see from the head output in the above cells that we have columns with dates going back into 2020. This must be because there is some inability to compare these date objects in the current dataframe accurately. Lets convert the dates into DateTime objects so we can figure out our actual date range, and manipulate and visualize our data better.</p>
+
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-python"><pre><span></span><span class="k">def</span> <span class="nf">dateToDateTime</span><span class="p">(</span><span class="n">date</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="n">split</span> <span class="o">=</span> <span class="n">date</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+    <span class="n">month</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">split</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">day</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">split</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">year</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">split</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">datetime</span><span class="o">.</span><span class="n">date</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">month</span><span class="p">,</span> <span class="n">day</span><span class="p">)</span>
+    
+
+<span class="k">def</span> <span class="nf">convertDateTime</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+    <span class="n">datetimes</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">index</span><span class="p">,</span><span class="n">row</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+        <span class="n">date</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;Report Date&quot;</span><span class="p">]</span>
+        <span class="n">datetimes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dateToDateTime</span><span class="p">(</span><span class="n">date</span><span class="p">))</span>
+    
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;DateTime&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">datetimes</span>
+    <span class="k">return</span> <span class="n">df</span>
+
+<span class="n">covid_data</span> <span class="o">=</span> <span class="n">convertDateTime</span><span class="p">(</span><span class="n">covid_data</span><span class="p">)</span>
+<span class="n">covid_data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
+
+
+
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Report Date</th>
+      <th>FIPS</th>
+      <th>Locality</th>
+      <th>VDH Health District</th>
+      <th>Total Cases</th>
+      <th>Hospitalizations</th>
+      <th>Deaths</th>
+      <th>DateTime</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>03/17/2020</td>
+      <td>51001</td>
+      <td>Accomack</td>
+      <td>Eastern Shore</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2020-03-17</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>03/17/2020</td>
+      <td>51003</td>
+      <td>Albemarle</td>
+      <td>Thomas Jefferson</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2020-03-17</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>03/17/2020</td>
+      <td>51005</td>
+      <td>Alleghany</td>
+      <td>Alleghany</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2020-03-17</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>03/17/2020</td>
+      <td>51007</td>
+      <td>Amelia</td>
+      <td>Piedmont</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2020-03-17</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>03/17/2020</td>
+      <td>51009</td>
+      <td>Amherst</td>
+      <td>Central Virginia</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2020-03-17</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>With the new DateTime column added, lets check to see what our actual date range looks like for this dataset.</p>
+
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-python"><pre><span></span><span class="n">printMinMax</span><span class="p">(</span><span class="n">covid_data</span><span class="p">,</span> <span class="s2">&quot;DateTime&quot;</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>Oldest entry:  2020-03-17
+Most recent entry:  2022-05-04
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Now we have a column with dates that we can actually compare in our data analysis. We can see that our data's report dates span from March 2020 to May 2022. Lets see what counties we have, how many dates are recorded, and see if each county has a report for each date.</p>
+
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-python"><pre><span></span><span class="c1"># Get a list of the unique counties</span>
+<span class="n">counties</span> <span class="o">=</span> <span class="n">covid_data</span><span class="p">[</span><span class="s2">&quot;Locality&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+<span class="c1"># Display how many unique counties are in our dataset</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;There are &quot;</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">counties</span><span class="p">),</span><span class="s2">&quot; unique counties&quot;</span><span class="p">)</span>
+
+<span class="c1"># Figure out how many unique dates we have data for</span>
+<span class="n">dates</span> <span class="o">=</span> <span class="n">covid_data</span><span class="p">[</span><span class="s2">&quot;DateTime&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+<span class="c1"># Display how many unique dates we have</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;There are &quot;</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">dates</span><span class="p">),</span><span class="s2">&quot; unique dates&quot;</span><span class="p">)</span>
+
+<span class="c1"># Get the number of rows containing each unique date in our dataset</span>
+<span class="n">date_counts</span> <span class="o">=</span> <span class="n">covid_data</span><span class="p">[</span><span class="s2">&quot;Report Date&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+<span class="n">unique_dates</span> <span class="o">=</span> <span class="n">date_counts</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+<span class="c1"># Display the unique date count values</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Each date has &quot;</span><span class="p">,</span><span class="n">unique_dates</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="s2">&quot; unique entries&quot;</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>There are  133  unique counties
+There are  779  unique dates
+Each date has  133  unique entries
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>This above cell gives us a lot of great information. We now know that we have 133 Virginia counties whose COVID reporting data is in this dataset. We also know that each of the 133 counties has reported COVID data for each of the 779 dates recorded in this table. With this information, we can now move onto visualizing our data.</p>
+
+</div>
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Exploratory-Data-Analysis">Exploratory Data Analysis<a class="anchor-link" href="#Exploratory-Data-Analysis">&#182;</a></h2><p>Now that we know a bit more about our dataset and have made some slight modifications to make it more manipulatable, lets try to visualize our COVID data.</p>
+
+</div>
 </div>
 </body>
 
