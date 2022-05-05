@@ -13986,9 +13986,11 @@ a.anchor-link {
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-python"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">datetime</span> 
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;seaborn-whitegrid&#39;</span><span class="p">)</span>
 </pre></div>
 
@@ -14012,7 +14014,7 @@ a.anchor-link {
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-python"><pre><span></span><span class="c1"># Pull data on COVID cases across Virginia</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Pull data on COVID cases across Virginia</span>
 <span class="n">covid_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;https://raw.githubusercontent.com/martindavid1995/Data-Science-Tutorial/master/Covid_VA.csv&quot;</span><span class="p">)</span>
 <span class="n">covid_data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
@@ -14136,7 +14138,7 @@ a.anchor-link {
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-python"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Total number of columns in the dataset: &quot;</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">covid_data</span><span class="o">.</span><span class="n">index</span><span class="p">))</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Total number of columns in the dataset: &quot;</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">covid_data</span><span class="o">.</span><span class="n">index</span><span class="p">))</span>
 </pre></div>
 
      </div>
@@ -14177,7 +14179,7 @@ a.anchor-link {
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-python"><pre><span></span><span class="c1"># Prints the minimum and maximum values of a specified column in a DataFrame</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Prints the minimum and maximum values of a specified column in a DataFrame</span>
 <span class="k">def</span> <span class="nf">printMinMax</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">column</span><span class="p">):</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Min: &quot;</span><span class="p">,</span><span class="n">df</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">())</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Max: &quot;</span><span class="p">,</span><span class="n">df</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
@@ -14224,7 +14226,7 @@ Max:  12/31/2021
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-python"><pre><span></span><span class="c1"># Split each date string into its components</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Split each date string into its components</span>
 <span class="k">def</span> <span class="nf">dateToDateTime</span><span class="p">(</span><span class="n">date</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="n">split</span> <span class="o">=</span> <span class="n">date</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
     <span class="n">month</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">split</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
@@ -14373,7 +14375,7 @@ Max:  12/31/2021
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-python"><pre><span></span><span class="n">printMinMax</span><span class="p">(</span><span class="n">covid_data</span><span class="p">,</span> <span class="s2">&quot;DateTime&quot;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">printMinMax</span><span class="p">(</span><span class="n">covid_data</span><span class="p">,</span> <span class="s2">&quot;DateTime&quot;</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -14415,7 +14417,7 @@ Max:  2022-05-04
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-python"><pre><span></span><span class="c1"># Get a list of the unique counties</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Get a list of the unique counties</span>
 <span class="n">counties</span> <span class="o">=</span> <span class="n">covid_data</span><span class="p">[</span><span class="s2">&quot;Locality&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
 <span class="c1"># Display how many unique counties are in our dataset</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;There are &quot;</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">counties</span><span class="p">),</span><span class="s2">&quot; unique counties&quot;</span><span class="p">)</span>
@@ -14484,7 +14486,7 @@ Each date has  133  unique entries
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-python"><pre><span></span><span class="c1"># Create figure and axes</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Create figure and axes</span>
 <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
 <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">()</span>
 
@@ -14496,7 +14498,7 @@ Each date has  133  unique entries
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Total Cases&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Cumulative COVID positive cases in Virginia over time&quot;</span><span class="p">)</span>
 
-<span class="c1"># Rotate tickss</span>
+<span class="c1"># Rotate ticks</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">90</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
@@ -14543,7 +14545,7 @@ Each date has  133  unique entries
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-python"><pre><span></span><span class="c1"># Takes a dataframe for a specific county and adds a column that shows the number of new cases reported for each report date</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Takes a dataframe for a specific county and adds a column that shows the number of new cases reported for each report date</span>
 <span class="k">def</span> <span class="nf">genColumnDifference</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">column</span><span class="p">):</span>
     <span class="n">offsets</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="c1"># For each row in the dataframe</span>
@@ -14568,17 +14570,121 @@ Each date has  133  unique entries
     <span class="n">county_frame</span> <span class="o">=</span> <span class="n">genColumnDifference</span><span class="p">(</span><span class="n">county_frame</span><span class="p">,</span> <span class="s2">&quot;Total Cases&quot;</span><span class="p">)</span>
     <span class="n">county_frame</span> <span class="o">=</span> <span class="n">genColumnDifference</span><span class="p">(</span><span class="n">county_frame</span><span class="p">,</span> <span class="s2">&quot;Hospitalizations&quot;</span><span class="p">)</span>
     <span class="n">county_frame</span> <span class="o">=</span> <span class="n">genColumnDifference</span><span class="p">(</span><span class="n">county_frame</span><span class="p">,</span> <span class="s2">&quot;Deaths&quot;</span><span class="p">)</span>
-    <span class="c1"># Make a dictionary entry so we have an easy way to determine which county each frame represents</span>
-    <span class="n">entry</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s2">&quot;county&quot;</span><span class="p">:</span> <span class="n">county</span><span class="p">,</span>
-        <span class="s2">&quot;df&quot;</span><span class="p">:</span> <span class="n">county_frame</span>
-    <span class="p">}</span>
-    <span class="n">county_frames</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">entry</span><span class="p">)</span>
+    <span class="c1"># Add it to our list of counties</span>
+    <span class="n">county_frames</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">county_frame</span><span class="p">)</span>
 </pre></div>
 
      </div>
 </div>
 </div>
+</div>
+
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Now we have a separate DataFrame for each county, and each of those frames now has columns representing the daily cases, hospitalizations, and deaths. It might be useful in our analysis to obtain the case, death, and hospitalization rates for each of our counties. To get accurate representations of these rates, we're going to need to know each counties population. A google search of <a href="https://www.virginia-demographics.com/counties_by_population">Virginia Counties by Population</a> brings us a chart with a value for each of Virginia's 133 counties. While we could sit here and manually enter the populations by hand, we can use python and <a href="https://www.crummy.com/software/BeautifulSoup/bs4/doc/">BeautifulSoup</a> to strip the data out of this chart so that we don't have to.</p>
+
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Use requests to pull data from URL</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;https://www.virginia-demographics.com/counties_by_population&quot;</span><span class="p">)</span>
+<span class="c1"># Use BeautifulSoup to parse the request&#39;s HTML</span>
+<span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="s1">&#39;html.parser&#39;</span><span class="p">)</span>
+<span class="c1"># Find the table object and prettify it</span>
+<span class="n">table</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;table&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">prettify</span><span class="p">()</span>
+<span class="c1"># Convert the table into a DataFrame</span>
+<span class="n">populations</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_html</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">table</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
+<span class="c1"># Drop the last row because it has data we don&#39;t need</span>
+<span class="n">populations</span> <span class="o">=</span> <span class="n">populations</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="mi">133</span><span class="p">)</span>
+<span class="n">populations</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
+
+
+
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Rank</th>
+      <th>County</th>
+      <th>Population</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>Fairfax County</td>
+      <td>1149439</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>Prince William County</td>
+      <td>466834</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>Virginia Beach city/county</td>
+      <td>450882</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>Loudoun County</td>
+      <td>405312</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>Chesterfield County</td>
+      <td>348500</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+
 </div>
 
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
@@ -14587,33 +14693,7 @@ Each date has  133  unique entries
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-python"><pre><span></span><span class="c1"># for frame in county_frames:</span>
-<span class="c1">#     county = frame[&quot;county&quot;]</span>
-<span class="c1">#     df = frame[&quot;df&quot;]</span>
-<span class="c1">#     # print(df)</span>
-<span class="c1">#     print(&quot;---&quot;,county,&quot;---&quot;)</span>
-<span class="c1">#     print(&quot;&gt;Total Cases Per Day&quot;)</span>
-<span class="c1">#     printMinMax(df, &quot;Total Cases Per Day&quot;)</span>
-<span class="c1">#     print(&quot;&gt;Deaths Per Day&quot;)</span>
-<span class="c1">#     printMinMax(df, &quot;Deaths Per Day&quot;)</span>
-<span class="c1">#     print(&quot;&gt;Hospitalizations Per Day&quot;)</span>
-<span class="c1">#     printMinMax(df, &quot;Hospitalizations Per Day&quot;)</span>
-<span class="c1">#     print()</span>
-<span class="c1">#     print()</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-python"><pre><span></span>
+<div class=" highlight hl-ipython3"><pre><span></span> 
 </pre></div>
 
      </div>
