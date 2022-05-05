@@ -3,3 +3,6 @@ Separate by county, and build a regression line for each county. Take a look at 
 Plot a heatmap of which counties have had the most cases using that plotting library
 
 Plot new cases over time by computing the difference in county per time unit
+
+Strip populations from https://www.virginia-demographics.com/counties_by_population and use them in analysis
+
