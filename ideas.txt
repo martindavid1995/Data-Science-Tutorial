@@ -6,3 +6,16 @@ Plot new cases over time by computing the difference in county per time unit
 
 Strip populations from https://www.virginia-demographics.com/counties_by_population and use them in analysis
 
+
+drops fips and report date
+
+line plot with multiple counties, new cases per day and total cases.
+
+Does county population have an effect on total cases?
+
+Does total cases have an effect on death rate?
+
+drop columns we dont need
+
+
+
