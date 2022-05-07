@@ -4,18 +4,13 @@ Plot a heatmap of which counties have had the most cases using that plotting lib
 
 Plot new cases over time by computing the difference in county per time unit
 
-Strip populations from https://www.virginia-demographics.com/counties_by_population and use them in analysis
-
-
-drops fips and report date
-
-line plot with multiple counties, new cases per day and total cases.
-
 Does county population have an effect on total cases?
 
 Does total cases have an effect on death rate?
 
-drop columns we dont need
+overlap cases, deaths, hospitalizations per capita between largest and smallest counties
+
+deaths per hospitalization rate?
 
 
 
