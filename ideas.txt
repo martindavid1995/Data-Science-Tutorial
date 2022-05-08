@@ -12,5 +12,9 @@ overlap cases, deaths, hospitalizations per capita between largest and smallest 
 
 deaths per hospitalization rate?
 
+HYPOTHESIS to TEST (maybe?):
+
+Counties with higher population will have higher rates of new cases than counties with low populations
+
 
 
