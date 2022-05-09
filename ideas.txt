@@ -13,8 +13,24 @@ overlap cases, deaths, hospitalizations per capita between largest and smallest 
 deaths per hospitalization rate?
 
 HYPOTHESIS to TEST (maybe?):
+Some form of linear modeling, maybe expected versus actual predictions or something
+can do train and test modeling
 
-Counties with higher population will have higher rates of new cases than counties with low populations
+Regression of new cases rate compared to death rate
+
+
+1)
+Total cases across all of VA
+
+2)
+Cases, hospitalization, death per day across VA
+
+3) 
+Cases/deaths across counties by size
+
+4)
+cases/deaths per capita across counties by size
+
 
 
 
