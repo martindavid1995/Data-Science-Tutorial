@@ -13980,7 +13980,7 @@ a.anchor-link {
 <p><strong>Introduction</strong></p>
 <p>Welcome to my CMSC320 Data Science Final Tutorial!</p>
 <p>In this tutorial, we will be showing how we can use Python data scraping, modeling, and regression testing libraries to perform some basic analysis on COVID data in the state of Virginia. The goal is to visualize, model, and gain some insight on the impact of COVID across the state.</p>
-<p>We will start by scraping our COVID reporting data off of the <a href="https://data.virginia.gov/">Virginia Open Data Portal</a>. Then we will process and tidy our data for our exploratory data analysis. After performing our analysis, we will use <a href="https://en.wikipedia.org/wiki/Regression_testing">regression testing</a> to see if there exists a significant correlation between county population size and COVID transmission/death rates. Finally, we will wrap it all up by concluding any of our findings.</p>
+<p>We will start by scraping our COVID reporting data off of the <a href="https://data.virginia.gov/">Virginia Open Data Portal</a>. Then, we will process and tidy our data for our exploratory data analysis. After performing our analysis, we will use <a href="https://en.wikipedia.org/wiki/Regression_testing">regression testing</a> to see if a significant correlation between county population size and COVID transmission/death rates exists. Finally, we will wrap it all up by concluding any of our findings.</p>
 <p>Let's get started!</p>
 
 </div>
@@ -13988,7 +13988,7 @@ a.anchor-link {
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><strong>Imports</strong></p>
-<p>The following is an import list of all the Python modules we use for the following tutorial, as well as some global styling settings.</p>
+<p>The following is an import list of all the Python modules we will use for the following tutorial, as well as some global styling settings.</p>
 
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
@@ -14020,8 +14020,8 @@ a.anchor-link {
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <hr>
-<h2 id="Data-Collection">Data Collection<a class="anchor-link" href="#Data-Collection">&#182;</a></h2><p>The purpose of this section is to begin our analysis by collecting our data. We can find publicly available information about many things on government websites. I went to <a href="https://data.virginia.gov">Virginia's</a> and found a great dataset of COVID reporting data organized by county. Each row is an individual county's report on their current running total of cases, hospitalizations, and deaths. Each day has a report from each county. Let's use this as our main data set for this analysis.</p>
-<p>Let's start by pulling the data from the dataset <a href="https://data.virginia.gov/Government/VDH-COVID-19-PublicUseDataset-Cases/bre9-aqqr">VDH-COVID-19-PublicUseDataset-Cases</a> as found on data.virginia.gov, and taking a look at what it contains:</p>
+<h2 id="Data-Collection">Data Collection<a class="anchor-link" href="#Data-Collection">&#182;</a></h2><p>The purpose of this section is to begin our analysis by collecting our data. I went to <a href="https://data.virginia.gov">Virginia's</a> public data page and found a great dataset on COVID reporting organized by county. Each row is an individual county's report on their current running total of cases, hospitalizations, and deaths. Each day has a report from each county. Let's use this as our main data set for this analysis.</p>
+<p>Let's start by pulling the data from the dataset <a href="https://data.virginia.gov/Government/VDH-COVID-19-PublicUseDataset-Cases/bre9-aqqr">VDH-COVID-19-PublicUseDataset-Cases</a> and taking a look at what it contains:</p>
 <p>I cloned the dataset and put it in a <a href="https://github.com/martindavid1995/Data-Science-Tutorial">GitHub Repository</a> in .csv format so that we can have a copy of the data without worrying about it changing on us in the future. We will use <a href="https://pandas.pydata.org/pandas-docs/stable/">Pandas</a> to read from that .csv and put it into a DataFrame so that we can begin working with it.</p>
 
 </div>
@@ -14148,13 +14148,13 @@ a.anchor-link {
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>In looking at this DataFrame, we see our listed columns. Each row in our table contains a particular county's case, hospitalization, and death <strong>cumulative</strong> counts for a particular day. Before ending this section, we might want to consider any more information that might be useful for us to get a good understanding of what COVID looks like in Virginia.</p>
-<p>Since each row in our dataset represents a different county, it might be helpful for us to get an idea of what counties have the largest and smallest populations. For example looking at death rate: three deaths in a single day in a Virginia county with a population of over 1 million people means significantly less than three deaths in a county with a population of 4,000 people in terms of virus deadliness. This is something we might want to consider when exploring our data, so we should attempt to find some population metrics for each county.</p>
+<p>Since each row in our dataset represents a different county, it might be helpful for us to get an idea of what counties have the largest and smallest populations. For example, looking at death rate: three deaths in a single day in a Virginia county with a population of over 1 million people means significantly less than three deaths in a county with a population of 4,000 people in terms of virus deadliness. This is something we might want to consider when exploring our data, so we should attempt to find some population metrics for each county.</p>
 
 </div>
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>A google search of <a href="https://www.virginia-demographics.com/counties_by_population">Virginia Counties by Population</a> brings us a with a chart containing a value for each of Virginia's 133 counties. While we could sit here and manually enter the populations by hand, we can use python and <a href="https://www.crummy.com/software/BeautifulSoup/bs4/doc/">BeautifulSoup</a> to strip the population data off this webpage so that we don't have to do all that manual data entry.</p>
+<p>A google search of <a href="https://www.virginia-demographics.com/counties_by_population">Virginia Counties by Population</a> brings us to a website with a chart containing a value for each of Virginia's 133 counties. While we could sit here and manually enter the populations by hand, we can use python and <a href="https://www.crummy.com/software/BeautifulSoup/bs4/doc/">BeautifulSoup</a> to strip the population data off this webpage so that we don't have to do all that manual data entry.</p>
 
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
@@ -14263,14 +14263,14 @@ a.anchor-link {
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Perfect! Now we have all of the data we are going to need for this analysis. We have our COVID reporting data, and we have our population sizes for each of our 133 Virginian counties. In the next section, we will begin manipulating these DataFrames so that we are able to have all the information in the format that we need to perform our data visualization and analysis.</p>
+<p>Perfect! Now we have all of the data we are going to need for this analysis. We have our COVID reporting data and population sizes for each of the 133 Virginian counties. In the next section, we will begin manipulating these DataFrames so that we are able to have all the information in the format that we need to perform our data visualization and analysis.</p>
 
 </div>
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <hr>
-<h2 id="Data-Management/Representation">Data Management/Representation<a class="anchor-link" href="#Data-Management/Representation">&#182;</a></h2><p>In this section, we will begin augmenting our dataset to contain the information that we need to perform our data visualization and interpretation. Before we start changing things too much, let's first try to get an idea of what our dataset looks like. We might ask to know how many rows of data do we have? On what day does the data start and when does it end? Are all of the 133 counties in Virginia represented in our main dataset? Does each county have a report for each day?</p>
+<h2 id="Data-Management/Representation">Data Management/Representation<a class="anchor-link" href="#Data-Management/Representation">&#182;</a></h2><p>In this section, we will begin augmenting our dataset to contain the information that we need to perform our data visualization and interpretation. Before we start changing things too much, let's first try to get an idea of what our dataset looks like. Here are some questions we might want to consider: how many rows of data do we have? On what day does the data start and when does it end? Are all of the 133 counties in Virginia represented in our main dataset? Does each county have a report for each day?</p>
 <p>Let's start answering these questions by figuring out how many entries we have in our <code>covid_data</code> DataFrame.</p>
 
 </div>
@@ -14312,7 +14312,7 @@ a.anchor-link {
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>So <code>covid_data</code> holds quite a bit of information. Over 100,000 rows where each row represents a single counties report on a given day. Next, let's try to see what the dates of the oldest and most recent reports are.</p>
+<p>So <code>covid_data</code> holds quite a bit of information. Over 100,000 rows where each row represents a single county's report on a given day. Next, let's try to see what the dates of the oldest and most recent reports are.</p>
 
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
@@ -14359,7 +14359,7 @@ Max:  12/31/2021
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>If we look at the results of the above cell, we notice our first issue with this dataset. The date range shows January 1, 2021 as being the earliest recorded date when we can clearly see from the head output in the above cells that we have columns with dates going back into 2020. This must be because there is some inability to compare these date objects in the current DataFrame accurately. Let's convert the dates into DateTime objects so we can figure out our actual date range. Having comparable values for our dates will be cruicial to accurately visualizing our data in future sections.</p>
+<p>If we look at the results of the above cell, we notice our first issue with this dataset. The date range shows January 1, 2021 as being the earliest recorded date when we can clearly see from the head output in the above cells that we have rows with dates going back into 2020. This must be because there is some inability to compare these date objects in the current DataFrame accurately. Let's convert the dates into DateTime objects so we can figure out our actual date range. Having comparable values for our dates will be cruicial to accurately visualizing our data in future sections.</p>
 
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
@@ -14614,15 +14614,15 @@ Each date has  133  unique entries
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>This above cell gives us a lot of great information. We now know that we have 133 Virginia counties whose COVID reporting data is in this dataset. We also know that each of the 133 counties has reported data for each of the 779 dates recorded in this table. This is great news for us as it means there shouldn't need to manually handle any missing data.</p>
+<p>This above cell gives us a lot of great information. We now know that we have 133 Virginia counties whose COVID reporting data is in this dataset. We also know that each of the 133 counties has reported data for each of the 779 dates recorded in this table. This is great news as it means we shouldn't need to manually handle any missing data.</p>
 
 </div>
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Unfortunately, the data provided from the Virginia website only records cumulative data. This means that instead of each county reporting their number of new cases, hospitalizations, and deaths each day, they only report the running total of each respective category since reporting began. While this is important information, it might be useful for us to gather the new reported cases, hospitalizations, and deaths for each date.</p>
-<p>Having a daily report values give us an easier way to visualize which dates have higher case, hospitalization, and death rates. It will allows us to get a better idea of when COVID is causing the most damage in Virginia and its counties. We can use the difference in values between consecutive days in order to determine how many new cases are reported each day.</p>
-<p>While we're at it, we should separate our DataFrames by county, since we plan to be looking at individual counties during our data analysis. Let's go ahead and split our dataset up by county, and augment each counties DataFrame with these per-day values.</p>
+<p>Having a daily report values give us an easier way to visualize which dates have higher case, hospitalization, and death rates. It will allow us to get a better idea of when COVID is causing the most damage in Virginia and its counties. We can use the difference in values between consecutive days in order to determine how many new cases are reported each day.</p>
+<p>While we're at it, we should separate our DataFrames by county, since we plan to be looking at individual counties during our data analysis. Let's go ahead and split our dataset up by county and augment each county's DataFrame with these per-day values.</p>
 
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
@@ -14966,7 +14966,7 @@ Each date has  133  unique entries
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Excellent! Now we can easily look up a counties population by just plugging in the <code>Locality</code> value in <code>covid_data</code> for that county.</p>
+<p>Excellent! Now we can easily look up a county's population by just plugging in the <code>Locality</code> value from <code>covid_data</code>.</p>
 
 </div>
 </div>
@@ -15060,7 +15060,7 @@ dtype: object</pre>
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Let's get a quick idea of what the population sizes look like. What are the most and least populated counties in Virginia and how much do they differ in size? Since this table is sorted we can simply pull the first and last entries.</p>
+<p>Let's get a quick idea of what the population sizes look like. What are the most and least populated counties in Virginia and how much do they differ in size? Since this table is sorted, we can simply pull the first and last entries.</p>
 
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
@@ -15111,7 +15111,7 @@ The median is Fluvanna County with 26873 residents.
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Next, let's use our population data to obtain some per-capita values. We can simply divide the total number of cases, hospitalizations, and deaths for any given date by that particular counties population value as stored in our <code>populations</code> DataFrame. Having per-capita values will allow us to standardize these counts across counties with varying populations and help us make a decision on if counties with populations have higher transmission rates.</p>
+<p>Next, let's use our population data to obtain some per-capita values. We can simply divide the total number of cases, hospitalizations, and deaths for any given date by that particular county's population value as stored in our <code>populations</code> DataFrame. Having per-capita values will allow us to standardize these counts across counties with varying populations and help us make a decision on if counties with populations have higher transmission rates.</p>
 
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
@@ -15244,8 +15244,8 @@ The median is Fluvanna County with 26873 residents.
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>As expected, the total number COVID cases in Virginia goes up over time. This is pretty intuitive as there is no way for the total cases to go down because it is a <strong>cumulative measure</strong>. From this chart we can start gather some information about COVID transmission rates. We see two sections with steep slopes - January 2020 and January 2021 show massive relative spikes in total cases state-wide. This comes with little surprise, as the winter months involve the cold/flu season as well as lots of family gatherings which impact the rate of virus transmission.</p>
-<p>In my opinion, plotting cases in this manner can be rather misleading. To me, this chart make it look like COVID is getting consistently worse over time. From a glance, it could be misinterpreted to think that today there are way more people getting sick from COVID today than there were last Janurary simply because the rightmost point on the graph will always be the highest point. To get an idea of how seriously COVID is spreading at any point in time on the above chart, you must look at the slope at that point at that, and not the height of the point. The average person to quickly glance at a chart formatted in this manner may not do that which could potentially lead to the spread of misinformation.</p>
+<p>As expected, the total number COVID cases in Virginia goes up over time. This is pretty intuitive as there is no way for the total cases to go down because it is a <strong>cumulative measure</strong>. From this chart, we can start gathering some information about COVID transmission rates. We see two sections with steep slopes - January 2020 and January 2021 which show massive relative spikes in total cases state-wide. This comes with little surprise, as the winter months involve the cold/flu season as well as lots of family gatherings which impact the rate of virus transmission.</p>
+<p>In my opinion, plotting cases in this manner can be rather misleading. To me, this chart make it look like COVID is getting consistently worse over time. From a glance, it could be misinterpreted to think that today there are way more people getting sick from COVID today than there were last January simply because the rightmost point on the graph will always be the highest point. To get an idea of how COVID is spreading at any point in time on the above chart, you must look at the slope at that point and not the height of the point.</p>
 <p>I think that it will be a lot more representative to see what the cases <strong>per day</strong> look like if we want a better understanding of when COVID is at its worst in Virginia. Let's now plot the the <code>Total Cases Per Day</code> column as we computed previously across all counties to get a better view of the impact COVID has on Virginia residents.</p>
 
 </div>
@@ -15296,11 +15296,11 @@ The median is Fluvanna County with 26873 residents.
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Now we have a much better picture of what COVID looks like in Virginia across time. From this chart we can see the same peaks in new cases that we saw in the previous chart, they are just much more noticeable from a glance. These spikes are pretty significant. Between Dec. 2020 and January 2021, Virginia counties reported between 200-1000 new cases a day, with one day having 1500 new cases. As we move into April 2021, new cases significantly diminish and we see around July 2021 the number of new cases being reported in Virginia is very minimal.</p>
+<p>Now we have a much better picture of what COVID looks like in Virginia across time. From this chart, we can see the same peaks in new cases that we saw in the previous chart; the peaks are much more noticeable from a glance. These spikes are pretty significant. Between December 2020 and January 2021, Virginia counties reported between 200-1000 new cases a day, with one day having 1500 new cases. As we move into April 2021, new cases significantly diminish and we see around July 2021 the number of new cases being reported in Virginia is very minimal.</p>
 <p>As we move into the end of 2021 and the beginning of 2022, we see a massive spike in new cases. During that period, we have a daily average of around 1500 cases with and two days with over 4000 new reported cases. As compared to the spike in 2020/2021, this new spike is visibly way worse. From a glance, the second spike in cases per day looks like it may be about three times as significant as the first.</p>
-<p>We should take a moment to address the fact that an increase in cases <strong>reported</strong> does not neccesarily imply a <strong>proportional</strong> increase in people <strong>contracting</strong> the virus. There are many factors outside of actual virus contraction rates that could influence these nubers such as: availability of testing, accuracy of testing, travel restrictions/precautions during the holiday season, testing requirements of workplaces or institutions, different virus variants, and many others. As we continue our analysis we should be aware these factors that likely influence the number of positive COVID cases being reported in each county.</p>
-<p>Aside from these two spikes though, new cases remain relatively low in Virginia rarely passing above 100-200 a day. In a state with over 8.5 million residents, these numbers are very low. We can also see now a bit of a rise right towards the end of the graph, implying that we might be looking at the beginning of a new spike in cases right now.</p>
-<p>Not only does visualizing the data in this manner give us an insight on when COVID is spiking and when it isn't, it gives us a better visual representation that shows us exactly how much larger the holiday surge was last winter was compared to the surge around the same time a year prior.</p>
+<p>We should take a moment to address the fact that an increase in cases <strong>reported</strong> does not neccesarily imply a <strong>proportional</strong> increase in people <strong>contracting</strong> the virus. There are many factors outside of actual virus contraction rates that could influence these numbers such as: availability of testing, accuracy of testing, travel restrictions/precautions during the holiday season, testing requirements of workplaces or institutions, different virus variants, and many others. As we continue our analysis, we should be aware these factors that likely influence the number of positive COVID cases being reported in each county.</p>
+<p>Aside from these two spikes though, new cases remain relatively low in Virginia, rarely passing above 100-200 a day. In a state with over 8.5 million residents, these numbers are very low. We can also see now a bit of a rise towards the end of the graph, implying that we might be looking at the beginning of a new spike in cases right now.</p>
+<p>Not only does visualizing the data in this manner give us an insight on when COVID is spiking and when it isn't, it gives us a better visual representation that shows us exactly how much larger the holiday surge was last winter than compared to the surge around the same time a year prior.</p>
 <p>Next, let's take a look at hospitalization rates across all of Virginia.</p>
 
 </div>
@@ -15345,7 +15345,7 @@ The median is Fluvanna County with 26873 residents.
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>The hospitalizations per day over time match up similarly to the new cases per day. The values are significantly lower, but we can see very similar peaks around the winter months of the past two years as in the above visualization of daily cases. This comes with little surprise as if there are more people sick at a given time, we would expect to see more people hospitalized. We do notice, however, one discrepancy right towards the beginning of our data collection around April 2020 which shows a relatively large spike in hospitalizations. If we compare this section in the hospitalization chart with its corresponding section in the cases per day chart, it appears that the ratio of hospitalizations per cases towards the beginning of reporting was a bit higher than it is now. This is likely due to a lack in understanding of the severity of COVID. When there was little known about the pandemic there was likely a lower symptom threshold for hospitalizing a patient, as doctors simply didn't know well the average person could fight off the virus.</p>
+<p>The hospitalizations per day over time match up similarly to the new cases per day. The values are significantly lower, but we can see very similar peaks around the winter months of the past two years as in the above visualization of daily cases. This comes with little surprise as if there are more people sick at a given time, we would expect to see more people hospitalized. We do notice, however, one discrepancy towards the beginning of our data collection around April 2020 which shows a relatively large spike in hospitalizations. If we compare this section in the hospitalization chart with its corresponding section in the cases per day chart, it appears that the ratio of hospitalizations per cases towards the beginning of reporting was a bit higher than it is now. This is likely due to a lack in understanding of the severity of COVID. When there was little information known about the pandemic, there was likely a lower symptom threshold for hospitalizing a patient, as doctors simply didn't know how well the average person could fight off the virus.</p>
 <p>The last thing we should assess when looking at the entirety of Virginia cases is the daily deaths. Let's plot that now.</p>
 
 </div>
@@ -15391,7 +15391,7 @@ The median is Fluvanna County with 26873 residents.
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>The deaths per day chart takes a bit of a departure from the above two plots. We see somewhat of a downward trend in daily deaths, especially when we consider the upward trend in new cases when looking at the peaks. Despite the massive increase in cases and hospitalizations in the second winter peak as compared to the first, the number of deaths per day during the second peak is not consistent with this increase. From a glance we can see that the second peak appears to have roughly the same, if not slightly less deaths per day than the first peak.</p>
-<p>This observation could be influenced by a number of factors. The first to consider would be what we stated above which was the fact that an increase in new cases reported does not neccesarily imply a <strong>proportional</strong> increase in people getting sick. Another factor would be medical research's ability to treat critical patients for the virus - as we understand more about how COVID impacts the body, medicine is bound to get more effective at treating sick patients which would likely increase survival rates. A third consideration would be the differences between virus variants. During January 2021 there was a belief that the Omicron variant was spreading rapidly and there was word that this variant was more contagious but had less of a physical impact on people. This claim would be supported by these charts showing that while many more people were getting sick during the second surge, not a lot of people were dying.</p>
+<p>This observation could be influenced by a number of factors. The first to consider would be what we stated above which was the fact that an increase in new cases reported does not neccesarily imply a <strong>proportional</strong> increase in people getting sick. Another factor would be medical research's ability to treat critical patients for the virus - as we understand more about how COVID impacts the body; medicine is bound to get more effective at treating sick patients which would likely increase survival rates. A third consideration would be the differences between virus variants. During January 2022 there was a belief that the Omicron variant was spreading rapidly and there was word that this variant was more contagious but had less of a physical impact on people. This claim would be supported by these charts showing that while many more people were getting sick during the second surge, not a lot of people were dying.</p>
 <p>Virginia also saw a peak in reported deaths at the beginning of our dataset that was very similar to the peak seen during the first winter spike. While the cases were lower during this early reporting period, the deaths per day is fairly similar. This could be due to either underreporting of cases during this time, or a lower ability for doctors to treat high-risk patients with severe cases of the virus. Either way, when looking solely at the peak moments on this deaths per day chart while factoring in reported cases, over time the deadliness of COVID appears to be going down.</p>
 <p>To get a better idea of how the deadliness of COVID has changed over time, let's do a little more data manipulation to observe the rate of deaths per positive cases.</p>
 
@@ -15469,7 +15469,7 @@ The median is Fluvanna County with 26873 residents.
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>This final chart in this section supports what we theorized in the previous charts which is that the deadliness of COVID in Virginia has seemingly gone down over time. From April-June 2020 the death rate was the highest but has steadily followed a moderate negative slope since then. This is good news for the future of COVID in Virginia, because it suggests COVID will continue to become less deadly in the future. This chart also shows that the peaks in COVID cases have little to no effect on the actual death rate, and that regardless of how rapidly COVID is spreading at any given time the chance of death remains fairly constant.</p>
+<p>This final chart in this section supports what we theorized in the previous charts which is that the deadliness of COVID in Virginia has seemingly gone down over time. From April-June 2020 the death rate was the highest but has steadily followed a moderate negative slope since then. This is good news for the future of COVID in Virginia, because it suggests COVID will continue to become less deadly in the future. This chart also shows that the peaks in COVID cases have little to no effect on the actual death rate regardless of how rapidly COVID is spreading at any given time the chance of death remains fairly constant.</p>
 
 </div>
 </div>
@@ -15477,9 +15477,9 @@ The median is Fluvanna County with 26873 residents.
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>From the visualizations of data in this section, we have been able to make the following observations about how COVID has impacted Virginia:</p>
 <ul>
-<li>There have been two major spikes in cases and hospitalizations since reporting began. One was during the winter of 2020/2021 and the other was during the winter of 2021/2022.</li>
+<li>There have been two major spikes in cases and hospitalizations since reporting began - one was during the winter of 2020/2021 and the second was during the winter of 2021/2022.</li>
 <li>While the second spike saw a massive increase in new cases reported as compared to the first, the second spike in cases saw an equal if not slightly lower death rate than the spike the year prior. </li>
-<li>During the beginnings of our reported data in April 2020, we saw low reported cases with high hospitalizations and a relatively high death rate. </li>
+<li>During the beginning of our reported data in April 2020, we saw low reported cases with high hospitalizations and a relatively high death rate. </li>
 <li>The deadliness of the virus has decreased over time, with the highest rate of deaths per cases being towards the beginning of the pandemic, and death rate gradually decreasing over time. </li>
 </ul>
 
@@ -15647,7 +15647,7 @@ To test this hypothesis, we will collect data on the most and least populated co
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>We should be good to go! Let's pick out ten of the largest and ten of the smallest counties by population and plot their regression lines based on their <code>Total Cases Per Capita</code> value that we computed earlier. Note that the only way for us to get a good representation of chance of illness is to use these per-capita values as we want to look at the percentage chance of contracting the virus based on population size and not just how many people got sick in each county. 1,000 new cases in a county of 5,000 residents means a lot more than it does in a county of over 1 million residents!</p>
+<p>We should be good to go! Let's pick out ten of the largest and ten of the smallest counties by population and plot their regression lines based on their <code>Total Cases Per Capita</code> value that we computed earlier. Note that the only way for us to get a good representation of chance of illness is to use these per-capita values as we want to look at the percentage chance of contracting the virus based on population size and not how many people got sick in each county. For example, 1,000 new cases in a county of 5,000 residents means a lot more than it does in a county of over 1 million residents!</p>
 
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
@@ -15744,7 +15744,7 @@ To test this hypothesis, we will collect data on the most and least populated co
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Our two groupings of counties follow similar trends. Some things to notice, however, are that the more populated counties appear to have a tighter distribution of cases per capita as compared to the less populated counties. This makes intuitive sense as the less populated counties have smaller sampling size of people which will attribute to higher variance in that data. In other words, an outlier increase (or reduction) of 200 cases on a single day will have a much more significant impact on a county with a couple thousand residents than it would in a county with hundreds of thousands or a million residents.</p>
+<p>Our two groupings of counties follow similar trends. Some things to notice, however, the more populated counties appear to have a tighter distribution of cases per capita as compared to the less populated counties. This makes intuitive sense as the less populated counties have a smaller sampling size of people which will attribute to higher variance in that data. In other words, an outlier increase (or reduction) of 200 cases in a single day will have a much more significant impact on a county with a couple thousand residents than it would in a county with hundreds of thousands or a million residents.</p>
 <p>Let's plot these two regression lines on top of each other to see if we can make a comparison between them.</p>
 
 </div>
@@ -15790,7 +15790,7 @@ To test this hypothesis, we will collect data on the most and least populated co
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Overlapping these regression lines shows us that our ten smallest and largest counties by population have very similar trends in new cases reported. There is a slight divergence in slope that acutally counters what I would have intuitively expected which would be the more populated areas having faster rates of spread, however it is extremely slight. From this modeling, there is inconclusive evidence to suggest that county population has a significant impact on COVID transmission rates.</p>
-<p>Before we finish looking at cases per capita, let's increase our sample sizes and run the same plots we just did. We can split our entire dataset in half and take the largest and smallest counties in all of Virginia to run our analysis. By doing so, we greatly increase our sampling size to reduce our variance. Thus, we should get better represenation of any significant relationship between population density and COVID transmission rates.</p>
+<p>Before we finish looking at cases per capita, let's increase our sample sizes and run the same plots we performed earlier. We can split our entire dataset in half and take the largest and smallest counties in all of Virginia to run our analysis. By doing so, we greatly increase our sampling size to reduce our variance. Thus, we should get better represenation of any significant relationship between population density and COVID transmission rates.</p>
 
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
@@ -15925,7 +15925,7 @@ To test this hypothesis, we will collect data on the most and least populated co
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Once again, we see two nearly identical regression lines with very similar slopes. From this analysis it is safe to conclude that there exists no relationship between population density and COVID transmission rate.</p>
+<p>Once again, we see two nearly identical regression lines with very similar slopes. From this analysis, it is safe to conclude that no relationship exists between population density and COVID transmission rate.</p>
 <p>Finally, let's look at <code>Deaths Per Capita</code> amongst the most and least populous counties in Virginia.</p>
 
 </div>
@@ -15970,8 +15970,8 @@ To test this hypothesis, we will collect data on the most and least populated co
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Here we see a very mild divergence in slope when looking at death rates. The least populated counties have up to a 0.1% increase in death rate over the more populated counties. Based on this data, it is safe to conclude that there exists a mild negative correlation between population size and death rate meaning that residents of less populated counties have a slightly higher chance of dying from COVID.</p>
-<p>We should be very careful in how we interpret this information. Our prior analysis showed that there existed little to no correlation between population density and COVID contraction/case rate. There aren't more people getting sick in these less populated areas of Virginia. This means that this slight increase in death rate is likely caused by other factors that exist in these lesser populated counties such as health standards or healthcare accessability.</p>
+<p>Here we see a very mild divergence in slope when looking at death rates. The least populated counties have up to a 0.1% increase in death rate over the more populated counties. Based on this data, it is safe to conclude that a mild negative correlation between population size and death rate exists, meaning that residents of less populated counties have a slightly higher chance of dying from COVID.</p>
+<p>We should be very careful in how we interpret this information. Our prior analysis shows little to no correlation between population density and COVID contraction/case rate exists. This doesn't mean that there are more people getting sick in these less populated areas of Virginia. This means that this slight increase in death rate is likely caused by other factors that exist in these lesser populated counties such as health standards or healthcare accessability.</p>
 <p>This concludes the <strong>Hypothesis Testing</strong> section of our tutorial. We will summarize our findings in the final section.</p>
 
 </div>
@@ -15992,24 +15992,24 @@ To test this hypothesis, we will collect data on the most and least populated co
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h4 id="Findings">Findings<a class="anchor-link" href="#Findings">&#182;</a></h4><ol>
-<li>Virginia saw two major spikes in COVID <strong>cases</strong>. Spike 1 occured during the winter of 2020/2021 and Spike 2 occured during the winter of 2021/2022.</li>
-<li>Spike 2's <strong>cases per day</strong> increase was significantly <strong>larger</strong> than Spike 1's. This could be influenced by the following factors (or others):<ul>
+<li>Virginia saw two major spikes in COVID <strong>cases</strong> - spike 1 occurred during the winter of 2020/2021 and spike 2 occurred during the winter of 2021/2022.</li>
+<li>Spike 2's <strong>cases per day</strong> increase was significantly <strong>larger</strong> than Spike 1's. This could be influenced by the following factors (and/or others):<ul>
 <li>Increased testing by the general population, perhaps in preparation for holiday travel.</li>
 <li>People getting together for the holidays resulting in a lapse of social distancing at gatherings.</li>
-<li>Transmission of the Omicron variant which was supposedly much more contagious.</li>
+<li>Transmission of the Omicron variant which was allegedly much more contagious.</li>
 <li>Increased awareness/fear of the virus as influenced by the media leading to more people getting tested.</li>
 </ul>
 </li>
 <li>Spike 2 saw <strong>fewer</strong> <strong>deaths per day</strong> than both spike 1 and the first few reporting days despite a <strong>massive increase</strong> in <strong>cases per day</strong>.</li>
 <li>In the earliest days of COVID reporting during April 2020, Virginia had <strong>high deaths and hospitalizations per day</strong> and its <strong>highest</strong> rate of <strong>deaths per cases</strong>.</li>
-<li>The <strong>deadliness</strong> of COVID has <strong>decreased</strong> over time. This could be due to the following factors (and others):<ul>
+<li>The <strong>deadliness</strong> of COVID has <strong>decreased</strong> over time. This could be due to the following factors (and/or others):<ul>
 <li>Increased efficacy of healthcare.</li>
 <li>Increased accessability to healthcare.</li>
 <li>The virus getting weaker over time.</li>
 </ul>
 </li>
 <li>There is <strong>insufficient evidence</strong> to conclude that there exists a relationship between <strong>population density</strong> and <strong>transmission rate</strong>. The proportion of  <strong>cases</strong> in counties of varying populations is <strong>consistent</strong>. </li>
-<li>There is <strong>sufficient evidence</strong> to conclude that there exists a <strong>mild</strong> relationship between <strong>population density</strong> and <strong>death rate</strong>. Counties with low populations saw at most a <strong>0.1% higher death rate</strong> than counties with high populations. Note that as per point 5, this is <strong>not</strong> due to an increase in <strong>transmission rate</strong> in these counties. Possible reasons for this increase in death rate could include the following (and others):<ul>
+<li>There is <strong>sufficient evidence</strong> to conclude that a <strong>mild</strong> relationship exists between <strong>population density</strong> and <strong>death rate</strong>. Counties with low populations saw at most a <strong>0.1% higher death rate</strong> than counties with high populations. Note that as per point 5, this is <strong>not</strong> due to an increase in <strong>transmission rate</strong> in these counties. Possible reasons for this increase in death rate could include the following (and/or others):<ul>
 <li>Lower accessibility to adequate healthcare.</li>
 <li>A lower average level of physical health.</li>
 </ul>
